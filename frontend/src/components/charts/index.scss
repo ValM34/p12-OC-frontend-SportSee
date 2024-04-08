@@ -1,0 +1,85 @@
+@import "../../assets/style/main.scss";
+.radial-bar-chart-container {
+  display: inline-block;
+  position: relative;
+  // background-color: $grey-light;
+  border-radius: 7px;
+
+  .radial-bar-custom-css {
+    .recharts-radial-bar-sectors {
+      path {
+        fill: $orange;
+      }
+    }
+  }
+
+  .average-score-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 70px;
+
+    div:nth-child(1) {
+      font-weight: 700;
+      font-size: 26px;
+      line-height: 36px;
+    }
+
+    div:nth-child(2), div:nth-child(3) {
+      font-weight: 700;
+      font-size: 16px;
+      color: $grey;
+      line-height: 24px;
+    }
+  }
+
+  .recharts-legend-item-text {
+    color: $black2!important;
+    font-size: 15px;
+  }
+}
+
+// BarChart
+.bar-chart-container {
+  .recharts-legend-item {
+    .recharts-surface {
+      vertical-align: initial!important;
+    }
+    
+    .recharts-legend-item-text {
+      color: $black!important;
+    }
+  }
+
+  .recharts-cartesian-axis-tick {
+    text {
+      tspan {
+        fill: #9B9EAC;
+      }
+    }
+  }
+}
+
+// LineChart
+.line-chart-container {
+  background-color: $orange;
+  display: inline-block;
+  border-radius: 7px;
+  // height: 263px;
+
+  .recharts-default-legend {
+    text-align: left!important;
+
+    .recharts-surface {
+      display: none!important;
+    }
+  }
+}
+
+.radar-chart-container {
+  .recharts-text {
+    fill: white;
+  }
+}

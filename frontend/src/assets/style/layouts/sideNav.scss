@@ -1,0 +1,41 @@
+.side-nav {
+  background-color: $black2;
+  width: 80px;
+  position: relative;
+
+  @include breakpoint(xl) {
+    width: 117px;
+  }
+
+  ul {
+    position: absolute;
+    top: calc(50% - 45.5px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    li {
+      margin-bottom: 15px;
+      
+      a {
+        img {
+          width: 50px;
+
+          @include breakpoint(xl) {
+            width: 64px;
+          }
+        }
+      }
+    }
+  }
+
+  .copyright {
+    color: $white;
+    position: absolute;
+    bottom: 170px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-90deg);
+    width: 200px;
+    font-size: 12px;
+  }
+}
+ 
