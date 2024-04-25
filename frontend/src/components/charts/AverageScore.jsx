@@ -18,7 +18,6 @@ AverageScore.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       todayScore: PropTypes.number,
-      fill: PropTypes.string,
       name: PropTypes.string,
     })
   ),
@@ -67,48 +66,6 @@ function AverageScore({ data }) {
         <div>objectif</div>
       </div>
     </div>
-    // <div className="radial-bar-chart-container">
-    //   <ResponsiveContainer aspect={1.2}>
-    //     <RadialBarChart
-    //       // cx={150}
-    //       // cy={150}
-    //       innerRadius={80}
-    //       barSize={20}
-    //       data={data}
-    //       startAngle={90}
-    //       endAngle={450}
-    //     >
-    //       <PolarAngleAxis
-    //         type="number"
-    //         domain={[0, 100]}
-    //         angleAxisId={0}
-    //         tick={false}
-    //       />
-    //       <RadialBar
-    //         className="radial-bar-custom-css"
-    //         minAngle={15}
-    //         background={{ fill: "#fbfbfb" }}
-    //         clockWise
-    //         dataKey="todayScore"
-    //         angleAxisId={0}
-    //         cornerRadius={10}
-    //       />
-    //       <Legend
-    //         iconSize={0}
-    //         width={120}
-    //         height={140}
-    //         layout="vertical"
-    //         verticalAlign="middle"
-    //         wrapperStyle={style}
-    //       />
-    //     </RadialBarChart>
-    //   </ResponsiveContainer>
-    //   <div className="average-score-container">
-    //     <div>{data ? data[0].todayScore : ""}%</div>
-    //     <div>de votre</div>
-    //     <div>objectif</div>
-    //   </div>
-    // </div>
   );
 }
 

@@ -8,6 +8,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import PropTypes from "prop-types";
+import { useState } from 'react';
 
 AverageSessions.propTypes = {
   data: PropTypes.arrayOf(
@@ -28,6 +29,7 @@ const style = {
 };
 
 function AverageSessions({ data }) {
+  const [shadowPosition, setShadowPosition] = useState(null);
   return (
     <div className="line-chart-container">
       <ResponsiveContainer aspect={1}>
@@ -39,8 +41,9 @@ function AverageSessions({ data }) {
             left: -50,
             bottom: -30,
           }}
+          onMouseMove={(e) => e.activeCoordinate.x <= 0 ? setShadowPosition(1000) : setShadowPosition(e.activeCoordinate.x)}
+          onMouseLeave={() => setShadowPosition(1000)}
         >
-          {/* <CartesianGrid strokeDasharray="3 3" /> */}
           <XAxis
             dataKey="day"
             tickLine={false}
@@ -53,7 +56,7 @@ function AverageSessions({ data }) {
             axisLine={false}
             padding={{ left: 0, right: 0 }}
           />
-          <Tooltip />
+          <Tooltip labelFormatter={() => ""} formatter={(value, name) => [`${value} ${name}`]} cursor={{ display: "none" }} />
           <Legend
             payload={[{ value: "Durée moyenne des sessions" }]}
             wrapperStyle={style}
@@ -61,7 +64,7 @@ function AverageSessions({ data }) {
           />
           <Line
             type="natural"
-            dataKey="sessionLength"
+            dataKey="min"
             dot={{ r: 0 }}
             strokeWidth={2}
             stroke="url(#colorGradient)"
@@ -73,6 +76,7 @@ function AverageSessions({ data }) {
             </linearGradient>
           </defs>
         </LineChart>
+        <div className="average-sessions-shadow" style={{ left: shadowPosition ?? 1000 }}></div>
       </ResponsiveContainer>
     </div>
   );

@@ -1,9 +1,6 @@
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Text } from "recharts";
 import PropTypes from "prop-types";
 
-// Vrai ordre :
-// Intensity - Speed - Strength - Endurance - Energy - Cardio
-
 ActivityType.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
@@ -18,7 +15,6 @@ function ActivityType({ data }) {
     <div className="radar-chart-container">
       <ResponsiveContainer aspect={1}>
         <RadarChart
-          // outerRadius={45}
           data={data}
           style={{ background: "#282D30", fontSize: "12px", borderRadius: "7px" }}
           margin={{ top: 50, right: 50, bottom: 50, left: 50 }}

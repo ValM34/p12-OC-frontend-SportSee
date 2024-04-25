@@ -43,6 +43,13 @@
 
 // BarChart
 .bar-chart-container {
+  .chart-title {
+    font-size: 15px;
+    position: absolute;
+    top: 28px;
+    left: 28px;
+  }
+
   .recharts-legend-item {
     .recharts-surface {
       vertical-align: initial!important;
@@ -67,7 +74,8 @@
   background-color: $orange;
   display: inline-block;
   border-radius: 7px;
-  // height: 263px;
+  overflow: hidden;
+  position: relative;
 
   .recharts-default-legend {
     text-align: left!important;
@@ -75,6 +83,16 @@
     .recharts-surface {
       display: none!important;
     }
+  }
+
+  .average-sessions-shadow {
+    position: absolute;
+    top: 0;
+    background-color: $black;
+    opacity: 0.1;
+    width: 1000px;
+    height: 1000px;
+    pointer-events: none;
   }
 }
 

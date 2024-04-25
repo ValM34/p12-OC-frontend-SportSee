@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import MainLayout from "../layouts/MainLayout.jsx";
 
 function SelectUser () {
   const navigate = useNavigate();
@@ -11,10 +12,12 @@ function SelectUser () {
   
 
   return (
-    <div>
-      <button onClick={selectKarl}>Karl</button>
-      <button onClick={selectCecilia}>Cecilia</button>
-    </div>
+    <MainLayout>
+      <div>
+        <button onClick={selectKarl}>Karl</button>
+        <button onClick={selectCecilia}>Cecilia</button>
+      </div>
+    </MainLayout>
   );
 }
 

@@ -24,15 +24,10 @@ DailyActivity.propTypes = {
   }),
 };
 
-const style = {
-  top: "-130px",
-  right: "-40px",
-  lineHeight: "24px",
-};
-
 function DailyActivity({ data }) {
   return (
     <div className="bar-chart-container">
+      <div className="chart-title">Activité quotidienne</div>
       <ResponsiveContainer>
         <BarChart
           data={data?.data.sessions}
@@ -42,26 +37,29 @@ function DailyActivity({ data }) {
             left: 20,
             bottom: 5,
           }}
-          barGap={-50}
+          barGap={-90}
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          {/* <CartesianGrid strokeDasharray="3 3" vertical={false} width={645} x={60} /> */}
           <XAxis dataKey="day" tickLine={false} padding={{ left: 0, right: 0 }} stroke="#9B9EAC" />
-          {/* <YAxis domain={[80, 100]} /> */}
           <YAxis
             orientation="right"
             tickMargin={30}
             tickLine={false}
             axisLine={false}
           />
-          <Tooltip />
+          <Tooltip labelStyle={{ display: "none" }} contentStyle={{ backgroundColor: "#ff0000", border: "none" }} itemStyle={{ color: "white", fontSize: "12px" }} />
           <Legend
             iconSize={10}
             iconType="circle"
             width={400}
             height={200}
             verticalAlign="middle"
-            wrapperStyle={style}
+            wrapperStyle={{
+              top: "-130px",
+              right: "-40px",
+              lineHeight: "24px",
+              fontSize: "15px"
+            }}
           />
           <Bar
             name="Poids (kg)"

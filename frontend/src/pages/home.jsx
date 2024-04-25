@@ -3,80 +3,31 @@ import ActivityType from "..//components/charts/ActivityType.jsx";
 import DailyActivity from "..//components/charts/DailyActivity.jsx";
 import AverageScore from "..//components/charts/AverageScore.jsx";
 import { useLocation } from "react-router-dom";
-import { useFetch } from "../utils/hooks/useFetch.jsx";
 import MainLayout from "../layouts/MainLayout.jsx";
 import caloriesIcon from "../assets/images/food/calories-icon.svg";
 import proteinIcon from "../assets/images/food/protein-icon.svg";
 import carbsIcon from "../assets/images/food/carbs-icon.svg";
 import fatIcon from "../assets/images/food/fat-icon.svg";
+import getData from '../utils/services/getData.js';
+import { useEffect, useState } from 'react';
 
 function Home() {
   const location = useLocation();
-  let averageScoreData = useFetch(
-    `http://localhost:3000/user${location.pathname}`
-  );
-  let dailyActivityData = useFetch(
-    `http://localhost:3000/user${location.pathname}/activity`
-  );
-  let averageSessionsData = useFetch(
-    `http://localhost:3000/user${location.pathname}/average-sessions`
-  );
-  let activityTypeData = useFetch(
-    `http://localhost:3000/user${location.pathname}/performance`
-  );
-
-  // Normalize the data
-  let averageScoreDataUpdated;
-  if (averageScoreData) {
-    if (averageScoreData.data.score) {
-      averageScoreDataUpdated = [
-        {
-          name: "Score",
-          todayScore: averageScoreData?.data.score * 100,
-          fill: "#82ca9d",
-        },
-      ];
-    } else {
-      averageScoreDataUpdated = [
-        {
-          name: "Score",
-          todayScore: averageScoreData?.data.todayScore * 100,
-          fill: "#82ca9d",
-        },
-      ];
-    }
-  }
-  if (dailyActivityData) {
-    for (let i = 0; i < dailyActivityData.data.sessions.length; i++) {
-      dailyActivityData.data.sessions[i].day = i + 1;
-    }
-  }
-  activityTypeData = activityTypeData?.data.data.map((data) => ({
-    ...data,
-    kind: activityTypeData?.data.kind[data.kind],
-  }));
-  const days = {
-    1: "L",
-    2: "M",
-    3: "M",
-    4: "J",
-    5: "V",
-    6: "S",
-    7: "D",
-  };
-  averageSessionsData = averageSessionsData?.data.sessions.map((session) => ({
-    ...session,
-    day: days[session.day],
-  }));
-
-  console.log(averageScoreData?.data.keyData)
-
+  const userId = location.pathname.split('/')[1];
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    getData(userId)
+      .then((data) => {
+        setData(data);
+      })
+  }, [userId])
+  console.log(data)
   return (
     <MainLayout>
       <div className="home-page-container">
         <div className="home-and-congratulation-container">
           <h1>
-            Bonjour <span>{averageScoreData ? averageScoreData.data.userInfos.firstName : ""}</span>
+            Bonjour <span>{data ? data.userMainData?.data.userInfos.firstName : ""}</span>
           </h1>
           <p>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
         </div>
@@ -84,20 +35,20 @@ function Home() {
           <div className="charts-container">
             <div className="charts-subcontainer-1">
               <div className="chart-container">
-                <DailyActivity data={dailyActivityData} />
+                <DailyActivity data={data?.userActivity} />
               </div>
             </div>
             <div className="charts-subcontainer-2">
               <div className="chart-container">
-                <AverageSessions data={averageSessionsData} />
+                <AverageSessions data={data?.userAverageSession} />
               </div>
               <span></span>
               <div className="chart-container">
-                <ActivityType data={activityTypeData} />
+                <ActivityType data={data?.userPerformance} />
               </div>
               <span></span>
               <div className="chart-container">
-                <AverageScore data={averageScoreDataUpdated} />
+                <AverageScore data={data?.userAverageScore} />
               </div>
             </div>
           </div>
@@ -108,7 +59,7 @@ function Home() {
               </div>
               <div className="food-infos-texts-container">
                 <div className="value">
-                  {averageScoreData ? averageScoreData.data.keyData.calorieCount : ""}kCal
+                  {data ? data.userMainData?.data.keyData.calorieCount : ""}kCal
                 </div>
                 <div className="key">
                   Calories
@@ -121,7 +72,7 @@ function Home() {
               </div>
               <div className="food-infos-texts-container">
                 <div className="value">
-                  {averageScoreData ? averageScoreData.data.keyData.proteinCount : ""}g
+                  {data ? data.userMainData?.data.keyData.proteinCount : ""}g
                 </div>
                 <div className="key">
                   Protéines
@@ -134,7 +85,7 @@ function Home() {
               </div>
               <div className="food-infos-texts-container">
                 <div className="value">
-                  {averageScoreData ? averageScoreData.data.keyData.carbohydrateCount : ""}g
+                  {data ? data.userMainData?.data.keyData.carbohydrateCount : ""}g
                 </div>
                 <div className="key">
                   Glucides
@@ -147,7 +98,7 @@ function Home() {
               </div>
               <div className="food-infos-texts-container">
                 <div className="value">
-                  {averageScoreData ? averageScoreData.data.keyData.lipidCount : ""}g
+                  {data ? data.userMainData?.data.keyData.lipidCount : ""}g
                 </div>
                 <div className="key">
                   Lipides
