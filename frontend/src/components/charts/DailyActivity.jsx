@@ -33,7 +33,7 @@ function DailyActivity({ data }) {
           data={data?.data.sessions}
           margin={{
             top: 5,
-            right: 30,
+            right: 0,
             left: 20,
             bottom: 5,
           }}
@@ -41,11 +41,20 @@ function DailyActivity({ data }) {
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis dataKey="day" tickLine={false} padding={{ left: 0, right: 0 }} stroke="#9B9EAC" />
-          <YAxis
+          <YAxis 
             orientation="right"
             tickMargin={30}
             tickLine={false}
             axisLine={false}
+            style={{ display: "none" }}
+          />
+          <YAxis 
+            yAxisId="right"
+            orientation="right"
+            tickMargin={30}
+            tickLine={false}
+            axisLine={false}
+            style={{ transform: "translateX(-30px)" }}
           />
           <Tooltip labelStyle={{ display: "none" }} contentStyle={{ backgroundColor: "#ff0000", border: "none" }} itemStyle={{ color: "white", fontSize: "12px" }} />
           <Legend
@@ -55,7 +64,7 @@ function DailyActivity({ data }) {
             height={200}
             verticalAlign="middle"
             wrapperStyle={{
-              top: "-130px",
+              top: "-95px",
               right: "-40px",
               lineHeight: "24px",
               fontSize: "15px"
@@ -67,6 +76,7 @@ function DailyActivity({ data }) {
             fill="#282D30"
             radius={[20, 20, 0, 0]}
             maxBarSize={7}
+            yAxisId="right"
           />
           <Bar
             name="Calories brûlées (kCal)"

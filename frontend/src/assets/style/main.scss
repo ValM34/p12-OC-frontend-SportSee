@@ -2,6 +2,10 @@
 @import "base/reset.scss";
 @import "base/mediaQueries.scss";
 @import "utils/variables";
+@import 'components/activityType.scss';
+@import 'components/averageScore.scss';
+@import 'components/dailyActivity.scss';
+@import 'components/averageSession.scss';
 @import './layouts/mainLayout.scss';
 @import './layouts/header.scss';
 @import './layouts/sideNav.scss';

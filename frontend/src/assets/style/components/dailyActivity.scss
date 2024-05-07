@@ -1,0 +1,26 @@
+.bar-chart-container {
+  .chart-title {
+    font-size: 15px;
+    position: absolute;
+    top: 28px;
+    left: 28px;
+  }
+
+  .recharts-legend-item {
+    .recharts-surface {
+      vertical-align: initial!important;
+    }
+    
+    .recharts-legend-item-text {
+      color: $black!important;
+    }
+  }
+
+  .recharts-cartesian-axis-tick {
+    text {
+      tspan {
+        fill: #9B9EAC;
+      }
+    }
+  }
+}

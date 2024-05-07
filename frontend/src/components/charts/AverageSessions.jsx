@@ -41,7 +41,11 @@ function AverageSessions({ data }) {
             left: -50,
             bottom: -30,
           }}
-          onMouseMove={(e) => e.activeCoordinate.x <= 0 ? setShadowPosition(1000) : setShadowPosition(e.activeCoordinate.x)}
+          onMouseMove={(e) => {
+            if(e.activeCoordinate?.x !== undefined) {
+              return e.activeCoordinate.x <= 0 ? setShadowPosition(1000) : setShadowPosition(e.activeCoordinate.x)
+            }
+          }}
           onMouseLeave={() => setShadowPosition(1000)}
         >
           <XAxis
